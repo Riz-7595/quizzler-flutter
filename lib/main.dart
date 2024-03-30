@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -26,10 +29,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> score = [];
-  List<String> question = [
-    'Question 1',
-    'Question 2',
-    'Question 3',
+  List<Question> question = [
+    Question(q: 'Question 1', a: true),
+    Question(q: 'Question 2', a: false),
+    Question(q: 'Question 3', a: true),
+    Question(q: 'Question 4', a: false),
+    Question(q: 'Question 5', a: true),
+    Question(q: 'Question 6', a: false),
   ];
   int n = 0;
 
@@ -45,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                question[n],
+                question[n].q,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -72,7 +78,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  n = (n + 1) % 3;
+                  n = (n + 1) % 6;
                 });
               },
             ),
@@ -95,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  n = (n + 1) % 3;
+                  n = (n + 1) % 6;
                 });
               },
             ),
