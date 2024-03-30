@@ -1,16 +1,9 @@
-# quizzler
+# Quizzler
 
-A new Flutter project.
+True False Quiz App.
 
-## Getting Started
+# Description
 
-This project is a starting point for a Flutter application.
+This application can be used to take true false quiz.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Visit https://riz-7595.github.io/quizzler-flutter/ to see a web version of this application.
