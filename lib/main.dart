@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
@@ -26,8 +27,19 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  int n = 0;
   QuizBrain quizBrain = QuizBrain();
+
+  void checkAnswer(bool checked) {
+    setState(() {
+      if (quizBrain.isEnd()) {
+        Alert(context: context, desc: "Quiz Finished!").show();
+        quizBrain.resetQuiz();
+        return;
+      }
+      quizBrain.addScore(quizBrain.getAnswer == checked);
+      quizBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.question![n].q,
+                quizBrain.getQuestion,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -55,6 +67,9 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: TextButton(
+              onPressed: () {
+                checkAnswer(true);
+              },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.green,
               ),
@@ -66,15 +81,6 @@ class _QuizPageState extends State<QuizPage> {
                   fontSize: 20.0,
                 ),
               ),
-              onPressed: () {
-                setState(() {
-                  if (quizBrain.question![n].a == true)
-                    print('Correct Answer!');
-                  else
-                    print('Wrong Answer!');
-                  n = (n + 1) % 6;
-                });
-              },
             ),
           ),
         ),
@@ -82,6 +88,9 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: TextButton(
+              onPressed: () {
+                checkAnswer(false);
+              },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red,
               ),
@@ -93,15 +102,6 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () {
-                setState(() {
-                  if (quizBrain.question![n].a == false)
-                    print('Correct Answer!');
-                  else
-                    print('Wrong Answer!');
-                  n = (n + 1) % 6;
-                });
-              },
             ),
           ),
         ),
@@ -109,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
           height: 20,
           margin: EdgeInsets.only(left: 20, bottom: 10, right: 20),
           child: Row(
-            children: quizBrain.score!,
+            children: quizBrain.getScore,
           ),
         )
       ],
