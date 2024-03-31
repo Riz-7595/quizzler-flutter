@@ -31,8 +31,8 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(bool checked) {
     setState(() {
-      if (quizBrain.isEnd()) {
-        Alert(context: context, desc: "Quiz Finished!").show();
+      if (quizBrain.isFinished()) {
+        Alert(context: context, title: "Quiz Finished!").show();
         quizBrain.resetQuiz();
         return;
       }

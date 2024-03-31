@@ -38,7 +38,7 @@ class QuizBrain {
     _n++;
   }
 
-  bool isEnd() {
+  bool isFinished() {
     return (_n == _question.length - 1);
   }
 
