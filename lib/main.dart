@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
 
@@ -28,16 +26,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Widget> score = [];
-  List<Question> question = [
-    Question(q: 'Question 1', a: true),
-    Question(q: 'Question 2', a: false),
-    Question(q: 'Question 3', a: true),
-    Question(q: 'Question 4', a: false),
-    Question(q: 'Question 5', a: true),
-    Question(q: 'Question 6', a: false),
-  ];
   int n = 0;
+  QuizBrain quizBrain = QuizBrain();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +41,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                question[n].q,
+                quizBrain.question![n].q,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -78,6 +68,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
+                  if (quizBrain.question![n].a == true)
+                    print('Correct Answer!');
+                  else
+                    print('Wrong Answer!');
                   n = (n + 1) % 6;
                 });
               },
@@ -101,6 +95,10 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
+                  if (quizBrain.question![n].a == false)
+                    print('Correct Answer!');
+                  else
+                    print('Wrong Answer!');
                   n = (n + 1) % 6;
                 });
               },
@@ -111,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
           height: 20,
           margin: EdgeInsets.only(left: 20, bottom: 10, right: 20),
           child: Row(
-            children: score,
+            children: quizBrain.score!,
           ),
         )
       ],
